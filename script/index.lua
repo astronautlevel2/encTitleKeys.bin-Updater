@@ -19,17 +19,20 @@ function update()
     Screen.waitVblankStart()
     Screen.flip()
     if Network.isWifiEnabled() then
-        Screen.debugPrint(5,5, "Working...", green, TOP_SCREEN)
+        Screen.debugPrint(5,5, "Downloading...", green, TOP_SCREEN)
         if System.doesFileExist("/freeShop/encTitleKeys.bin") then
         System.deleteFile("/freeShop/encTitleKeys.bin")
         end
         Network.downloadFile("http://matmaf.github.io/encTitleKeys.bin-Updater/f4g5h6.zip", "/f4g5h6.zip")
+        Screen.debugPrint(5,35, "Extracting...", green, TOP_SCREEN)
         System.extractFromZIP("/f4g5h6.zip", "a1s2d3.bin", "/a1s2d3.bin")
+        Screen.debugPrint(5,50, "Renaming...", green, TOP_SCREEN)
         System.renameFile("/a1s2d3.bin", "/freeShop/encTitleKeys.bin")
+        Screen.debugPrint(5,65, "Cleaning up...", green, TOP_SCREEN)
         System.deleteFile("/f4g5h6.zip")
-        Screen.debugPrint(5,35, "Done!", green, TOP_SCREEN)
-        Screen.debugPrint(5,50, "Press START to return to Homemenu/HBL", green, TOP_SCREEN)
-        Screen.debugPrint(5,65, "Press SELECT to reboot", green, TOP_SCREEN)
+        Screen.debugPrint(5,80, "Done!", green, TOP_SCREEN)
+        Screen.debugPrint(5,95, "Press START to return to Homemenu/HBL", green, TOP_SCREEN)
+        Screen.debugPrint(5,110, "Press SELECT to reboot", green, TOP_SCREEN)
         while true do
             pad = Controls.read()
             if Controls.check(pad,KEY_START) then
