@@ -63,11 +63,9 @@ function main()
     Screen.debugPrint(30,20, "Update .bin", white, TOP_SCREEN)
     Screen.debugPrint(30,35, "Return to Homemenu/HBL", white, TOP_SCREEN)
     Screen.flip()
-end
 
-while true do
+	while true do
         pad = Controls.read()
-        
         if Controls.check(pad,KEY_DDOWN) and not Controls.check(oldpad,KEY_DDOWN) then
             if (curPos < 35) then
                 curPos = curPos + 15
@@ -87,5 +85,6 @@ while true do
         end
         oldpad = pad
     end
+end
 
 main()
