@@ -69,25 +69,27 @@ end
 
 
 function init()
+	Screen.refresh()
+	Screen.clear(TOP_SCREEN)
 	if Network.isWifiEnabled() then
 		motd = Network.requestString("http://matmaf.github.io/encTitleKeys.bin-Updater/motd")
 		size = tonumber(Network.requestString("http://matmaf.github.io/encTitleKeys.bin-Updater/size"))
 		if System.doesFileExist("/freeShop/encTitleKeys.bin") then
 			local fileStream = io.open("/freeShop/encTitleKeys.bin", FREAD)
-            usersize = tonumber(io.size(fileStream))
-            io.close(fileStream)
+            		usersize = tonumber(io.size(fileStream))
+            		io.close(fileStream)
 		end
 	else
 		Screen.debugPrint(5,5, "Wi-Fi is disabled. Restart and try again.", red, TOP_SCREEN)
-        Screen.debugPrint(5,20, "Press A to go back to Homemenu", red, TOP_SCREEN)
-        while true do
-            pad = Controls.read()
-            if Controls.check(pad,KEY_A) then
-                Screen.waitVblankStart()
-                Screen.flip()
-                System.exit()
-            end
-        end
+        	Screen.debugPrint(5,20, "Press A to go back to Homemenu", red, TOP_SCREEN)
+        	Screen.waitVblankStart()
+        	Screen.flip()
+        	while true do
+         		pad = Controls.read()
+            		if Controls.check(pad,KEY_A) then
+                		System.exit()
+            		end
+        	end
 	end
 end
 
