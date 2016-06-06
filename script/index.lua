@@ -47,9 +47,9 @@ function update()
                 Screen.flip()
                 System.exit()
             elseif Controls.check(pad,KEY_A) then
-            	Screen.waitVblankStart()
+                Screen.waitVblankStart()
                 Screen.flip()
-            	System.launchCIA(0x0f12ee00,SDMC)
+                System.launchCIA(0x0f12ee00,SDMC)
             end
         end
 
@@ -69,28 +69,28 @@ end
 
 
 function init()
-	Screen.refresh()
-	Screen.clear(TOP_SCREEN)
-	if Network.isWifiEnabled() then
-		motd = Network.requestString("http://matmaf.github.io/encTitleKeys.bin-Updater/motd")
-		size = tonumber(Network.requestString("http://matmaf.github.io/encTitleKeys.bin-Updater/size"))
-		if System.doesFileExist("/freeShop/encTitleKeys.bin") then
-			local fileStream = io.open("/freeShop/encTitleKeys.bin", FREAD)
-            		usersize = tonumber(io.size(fileStream))
-            		io.close(fileStream)
-		end
-	else
-		Screen.debugPrint(5,5, "Wi-Fi is disabled. Restart and try again.", red, TOP_SCREEN)
-        	Screen.debugPrint(5,20, "Press A to go back to Homemenu", red, TOP_SCREEN)
-        	Screen.waitVblankStart()
-        	Screen.flip()
-        	while true do
-         		pad = Controls.read()
-            		if Controls.check(pad,KEY_A) then
-                		System.exit()
-            		end
-        	end
-	end
+    Screen.refresh()
+    Screen.clear(TOP_SCREEN)
+    if Network.isWifiEnabled() then
+        motd = Network.requestString("http://matmaf.github.io/encTitleKeys.bin-Updater/motd")
+        size = tonumber(Network.requestString("http://matmaf.github.io/encTitleKeys.bin-Updater/size"))
+        if System.doesFileExist("/freeShop/encTitleKeys.bin") then
+            local fileStream = io.open("/freeShop/encTitleKeys.bin", FREAD)
+            usersize = tonumber(io.size(fileStream))
+            io.close(fileStream)
+        end
+    else
+        Screen.debugPrint(5,5, "Wi-Fi is disabled. Restart and try again.", red, TOP_SCREEN)
+        Screen.debugPrint(5,20, "Press A to go back to Homemenu", red, TOP_SCREEN)
+        Screen.waitVblankStart()
+        Screen.flip()
+        while true do
+            pad = Controls.read()
+            if Controls.check(pad,KEY_A) then
+            System.exit()
+            end
+        end
+    end
 end
 
 function main()
@@ -103,14 +103,14 @@ function main()
     Screen.debugPrint(30,200, "v1.2", white, TOP_SCREEN)
     Screen.debugPrint(30,215, "by MatMaf", white, TOP_SCREEN)
     if usersize == size then
-    	Screen.debugPrint(5,20, "encTitleKeys.bin is up to date.", green, BOTTOM_SCREEN)
+        Screen.debugPrint(5,20, "encTitleKeys.bin is up to date.", green, BOTTOM_SCREEN)
     else
-    	Screen.debugPrint(5,20, "encTitleKeys.bin is not up to date.", red, BOTTOM_SCREEN)
+        Screen.debugPrint(5,20, "encTitleKeys.bin is not up to date.", red, BOTTOM_SCREEN)
     end
     Screen.debugPrint(5,5, motd, white, BOTTOM_SCREEN)
     Screen.flip()
 
-	while true do
+    while true do
         pad = Controls.read()
         if Controls.check(pad,KEY_DDOWN) and not Controls.check(oldpad,KEY_DDOWN) then
             if (curPos < 35) then
